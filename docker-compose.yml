@@ -13,5 +13,23 @@ services:
         published: 50070
       - "50075"
       - "50090"
-
+  yarn-resourcemanager:
+    build: ./hadoop
+    command: /usr/local/hadoop/bin/yarn resourcemanager
+    ports:
+      - "8030"
+      - "8031"
+      - "8032"
+      - "8033"
+      - "8040"
+      - target: 8088
+        published: 8088
+  yarn-node:
+    build: ./hadoop
+    command: /usr/local/hadoop/bin/yarn nodemanager
+    depends_on:
+      - yarn-resourcemanager
+    ports:
+      - target: 8042
+        published: 8042
 
