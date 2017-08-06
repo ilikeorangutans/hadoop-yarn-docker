@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  hdfs-namenode:
+    build: ./hadoop
+    command: /usr/local/hadoop/bin/hdfs namenode
+    ports:
+      - "8020"
+      - target: 9000
+        published: 9000
+      - "50010"
+      - "50020"
+      - target: 50070
+        published: 50070
+      - "50075"
+      - "50090"
+
+
