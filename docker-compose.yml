@@ -13,13 +13,19 @@ services:
         published: 50070
       - "50075"
       - "50090"
+  hdfs-datanode:
+    build: ./hadoop
+    command: /usr/local/hadoop/bin/hdfs datanode
+    depends_on:
+      - hdfs-namenode
   yarn-resourcemanager:
     build: ./hadoop
     command: /usr/local/hadoop/bin/yarn resourcemanager
     ports:
       - "8030"
       - "8031"
-      - "8032"
+      - target: 8032
+        published: 8032
       - "8033"
       - "8040"
       - target: 8088
