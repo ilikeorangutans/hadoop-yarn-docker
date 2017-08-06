@@ -3,8 +3,8 @@ FROM openjdk:latest
 ENV HADOOP_VERSION=2.8.1
 ENV HADOOP_HOME=/usr/local/hadoop
 
-#RUN curl -L http://apache.mirror.globo.tech/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz | tar -xz -C /usr/local/
-ADD hadoop-2.8.1.tar.gz /usr/local/
+RUN curl -L http://apache.mirror.globo.tech/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz | tar -xz -C /usr/local/
+# ADD hadoop-2.8.1.tar.gz /usr/local/
 RUN ln -s /usr/local/hadoop-$HADOOP_VERSION /usr/local/hadoop
 RUN mkdir -p /data
 
