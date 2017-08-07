@@ -38,4 +38,11 @@ services:
     ports:
       - target: 8042
         published: 8042
+  spark:
+    build: ./hadoop
+    depends_on:
+      - yarn-resourcemanager
+    volumes:
+      - ./spark:/spark:rw
+
 
