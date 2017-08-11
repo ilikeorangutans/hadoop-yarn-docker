@@ -18,6 +18,9 @@ services:
     command: /usr/local/hadoop/bin/hdfs datanode
     depends_on:
       - hdfs-namenode
+    ports:
+      - target: 50075
+        published: 50075
   yarn-resourcemanager:
     build: ./hadoop
     command: /usr/local/hadoop/bin/yarn resourcemanager
@@ -30,11 +33,16 @@ services:
       - "8040"
       - target: 8088
         published: 8088
+    depends_on:
+      - hdfs-namenode
+      - hdfs-datanode
   yarn-node:
     build: ./hadoop
     command: /usr/local/hadoop/bin/yarn nodemanager
     depends_on:
       - yarn-resourcemanager
+      - hdfs-namenode
+      - hdfs-datanode
     ports:
       - target: 8042
         published: 8042
@@ -42,6 +50,9 @@ services:
     build: ./hadoop
     depends_on:
       - yarn-resourcemanager
+      - yarn-node
+      - hdfs-namenode
+      - hdfs-datanode
     volumes:
       - ./spark:/spark:rw
 
